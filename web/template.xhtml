@@ -21,22 +21,22 @@
                 <h:link value=" Destinations " outcome="destinations"/>
                 <h:link value=" About " outcome="about"/>
                 <h:link value=" Contact " outcome="contact"/>  
-                <h:link id="logIn" value=" Sign In " outcome="logIn"/>
+                <h:link id="login1" value=" Sign In " outcome="logIn"/>
             </ui:insert>
         </div>
         <div>
             <div id="left">
                 <ui:insert name="left">
                     Search for Flights
-                    <form>
+                    <h:form >
                         <h:inputText/>
                         <h:selectOneRadio required="true" value="B">
                             <f:selectItem itemValue="B" itemLabel="B"/>
                             <f:selectItem itemValue="F" itemLabel="F"/>
                             <f:selectItem itemValue="E" itemLabel="E"/>
                         </h:selectOneRadio>
-                    </form>
-                    <h:link id="logIn" value=" Mina Resor " outcome="logIn"/>
+                    </h:form>
+                    <h:link id="login2" value=" Mina Resor " outcome="logIn"/>
                 </ui:insert>
             </div>
             <div id="content" class="left_content">
