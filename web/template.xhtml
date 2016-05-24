@@ -15,7 +15,12 @@
 
 
         <div id="top" class="top">
-            <ui:insert name="top">Top</ui:insert>
+            <ui:insert name="top">
+                <h:link value=" Home " outcome="index"/>
+                <h:link value=" Destinations " outcome="destinations"/>
+                <h:link value=" About " outcome="about"/>
+                <h:link value=" Contact " outcome="contact"/> 
+            </ui:insert>
         </div>
         <div>
             <div id="left">
