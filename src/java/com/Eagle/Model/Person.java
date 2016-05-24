@@ -1,10 +1,12 @@
 package com.Eagle.Model;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -18,7 +20,11 @@ public class Person implements Serializable
     @NotNull
     private String name;
 
+    @Column(unique = true)
     private String username;
+
+    @OneToOne
+    private Seat seat;
 
     public Person(String name, String username)
     {
@@ -35,7 +41,7 @@ public class Person implements Serializable
     public Person()
     {
     }
-    
+
     private String generatedUsername()
     {
         return username = "Eagle" + id;
@@ -72,5 +78,15 @@ public class Person implements Serializable
         this.username = username;
     }
 
+    public Seat getSeat()
+    {
+        return seat;
+    }
+
+    public void setSeat(Seat seat)
+    {
+        this.seat = seat;
+    }
 //</editor-fold>
+
 }
