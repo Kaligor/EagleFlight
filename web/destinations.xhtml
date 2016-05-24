@@ -2,11 +2,30 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <ui:composition template="template.xhtml">
         <ui:define name="content">
-            This is the Destination page
+            <h3>Welcome to our destinations</h3>
+            <c:set var="flights" value="#{['F_Los Angeles','F_San Francisco', 'F_Kiruna']}"/>
+            <ui:repeat var="flight" value="#{flights}">
+                <h:panelGrid id="panel" columns="2" border="0"
+                             cellpadding="5" cellspacing="1">
+                    <f:facet name="header">
+                        <h:graphicImage name="images/flight.jpg" width="50" height="30" />
+                    </f:facet>
+                    <h:outputLink value="booking.xhtml?id=#{flight}">#{flight}</h:outputLink>
+                    <h:outputText value="Leaves 12:45"/>
+                    <h:outputText value="From airport"/>
+                    <h:outputText value="To airport"/>
+                    <f:facet name="footer">
+                        <h:outputText value="2 free seats"/>
+                    </f:facet>
+                </h:panelGrid>
+                <hr/>
+            </ui:repeat>
         </ui:define>
     </ui:composition>
 </html>
