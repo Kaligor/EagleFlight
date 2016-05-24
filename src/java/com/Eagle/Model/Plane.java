@@ -32,20 +32,33 @@ public class Plane implements Serializable
     int FIRSTCLASS = 0;
     int ECONOMYCLASS = 1;
 
-    public Plane(String callsign, int nrOffF, int nrOffE)
+    /**
+     * Standard Constructor
+     * @param callsign
+     * @param nrOfF
+     * @param nrOfE
+     */
+    public Plane(String callsign, int nrOfF, int nrOfE)
     {
         this.callsign = callsign;
-        this.nrOfE = nrOffE;
-        this.nrOfF = nrOffF;
+        this.nrOfE = nrOfE;
+        this.nrOfF = nrOfF;
         
         this.nrOfEA = this.nrOfE;
         this.nrOfFA = this.nrOfF;
     }
 
+    /**
+     * Default constructor for internal use only
+     */
     public Plane()
     {
     }
 
+    /**
+     * Books a ticket if a seat of requested Rank is available
+     * @param seat 
+     */
     public void bookTicket(Seat seat)
     {
         if (seat.getRank() == FIRSTCLASS) 
@@ -64,6 +77,11 @@ public class Plane implements Serializable
         }
     }
 
+    /**
+     * Checks if the requested Rank is available
+     * @param rank
+     * @return 
+     */
     public boolean getAvailableCheck(int rank)
     {
         if (rank == FIRSTCLASS)

@@ -1,11 +1,13 @@
 package com.Eagle.Model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 @Entity
 public class Flight implements Serializable
@@ -18,23 +20,51 @@ public class Flight implements Serializable
     private String home;
     private String destination;
 
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date takeoff;
+
     @OneToOne
     private Plane plane;
 
     private int payout;
 
+    private int imageID;
+
+    /** 
+     * Default constructor for internal use only
+     */
     public Flight()
     {
     }
 
-    public Flight(String home, String destination, Plane plane)
+    /**
+     * Constructor for normal use
+     * @param home
+     * @param destination
+     * @param plane
+     * @param takeoff
+     * @param imageID 
+     */
+    public Flight(String home, String destination, Plane plane, Date takeoff, int imageID)
     {
         this.home = home;
         this.destination = destination;
         this.plane = plane;
+        this.takeoff = takeoff;
+        this.imageID = imageID;
     }
 
     //<editor-fold defaultstate="collapsed" desc="Getters & Setters">
+    public int getImageID()
+    {
+        return imageID;
+    }
+
+    public void setImageID(int imageID)
+    {
+        this.imageID = imageID;
+    }
+
     public String getHome()
     {
         return home;
@@ -83,6 +113,16 @@ public class Flight implements Serializable
     public void setPayout(int payout)
     {
         this.payout = payout;
+    }
+
+    public Date getTakeoff()
+    {
+        return takeoff;
+    }
+
+    public void setTakeoff(Date takeoff)
+    {
+        this.takeoff = takeoff;
     }
 //</editor-fold>
 

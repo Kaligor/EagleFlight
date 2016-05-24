@@ -26,22 +26,38 @@ public class Person implements Serializable
     @OneToOne
     private Seat seat;
 
+    /**
+     * Normal registrated user
+     * @param name
+     * @param username 
+     */
     public Person(String name, String username)
     {
         this.name = name;
         this.username = username;
     }
 
+    /**
+     * User without login
+     * @param name 
+     */
     public Person(String name)
     {
         this.name = name;
         this.username = generatedUsername();
     }
 
+    /**
+     * Default constructor for internal use only
+     */
     public Person()
     {
     }
 
+    /**
+     * Generates usernames for people that do not want to login
+     * @return Eagle+Id
+     */
     private String generatedUsername()
     {
         return username = "Eagle" + id;
