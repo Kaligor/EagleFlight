@@ -85,9 +85,6 @@ public class ConstructionYard
     {
         this.plane = plane;
     }
-    
-    
-//</editor-fold>
 
     public String getName()
     {
@@ -98,5 +95,5 @@ public class ConstructionYard
     {
         this.name = name;
     }
-
+//</editor-fold>
 }
