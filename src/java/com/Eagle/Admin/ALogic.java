@@ -28,7 +28,7 @@ public class ALogic
     
     public List<Plane> getAllPlanes() 
     {
-        Query query = em.createNamedQuery("SELECT * FROM Plane", Plane.class);
+        Query query = em.createNamedQuery("SELECT * FROM plane", Plane.class);
         List<Plane> list = query.getResultList();
         return list;
     }
