@@ -20,6 +20,7 @@ public class ConstructionYard
     long id;
 
     Airport airport;
+    String name;
     String description = "";
     List<Plane> hangar = new ArrayList();
     Plane plane;
@@ -84,6 +85,18 @@ public class ConstructionYard
     {
         this.plane = plane;
     }
+    
+    
 //</editor-fold>
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
 
 }
