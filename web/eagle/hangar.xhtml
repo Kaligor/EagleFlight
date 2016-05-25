@@ -9,11 +9,15 @@
         <ui:define name="content">
             <h3>Add a new plane</h3>
             <h:form>
-                Name of plane: <h:inputText value="Planets namn"/>
+                Name of plane: <h:inputText value="#{hangar.callsign}"/>
                 <br/>
-                Number of seats: <h:inputText pt:type="number" pt:min="1" pt:max="200" value="Max säten"/>
+                Number of firstclass seats:
+                <h:inputText pt:type="number" pt:min="1" pt:max="20" value="#{hangar.nrOfF}"/>
                 <br/>
-                <h:commandButton value="Add"/>
+                Number of economy seats:
+                <h:inputText pt:type="number" pt:min="1" pt:max="200" value="#{hangar.nrOfE}"/>
+                <br/>
+                <h:commandButton value="Add" action="#{hangar.newPlane()}"/>
             </h:form>
         </ui:define>
     </ui:composition>
