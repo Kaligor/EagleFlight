@@ -2,11 +2,13 @@ package com.Eagle.Model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Plane implements Serializable
@@ -18,13 +20,16 @@ public class Plane implements Serializable
 
     private String callsign;
 
+    @OneToOne
+    private Airport homebase;
+
     @OneToMany
-    private ArrayList<Seat> seats;
+    private List<Seat> seats;
 
     //Available
     int nrOfFA;
     int nrOfEA;
-    
+
     //Max
     int nrOfF;
     int nrOfE;
@@ -33,7 +38,23 @@ public class Plane implements Serializable
     int ECONOMYCLASS = 1;
 
     /**
-     * Standard Constructor
+     * Standard Constructor, includes Homebase
+     * @param callsign
+     * @param homebase
+     * @param nrOfF
+     * @param nrOfE 
+     */
+    public Plane(String callsign, Airport homebase, int nrOfF, int nrOfE)
+    {
+        this.callsign = callsign;
+        this.homebase = homebase;
+        this.nrOfF = nrOfF;
+        this.nrOfE = nrOfE;
+    }
+    
+    /**
+     * Standard Constructor, does not Include Homebase
+     *
      * @param callsign
      * @param nrOfF
      * @param nrOfE
@@ -43,7 +64,7 @@ public class Plane implements Serializable
         this.callsign = callsign;
         this.nrOfE = nrOfE;
         this.nrOfF = nrOfF;
-        
+
         this.nrOfEA = this.nrOfE;
         this.nrOfFA = this.nrOfF;
     }
@@ -57,21 +78,27 @@ public class Plane implements Serializable
 
     /**
      * Books a ticket if a seat of requested Rank is available
-     * @param seat 
+     *
+     * @param seat
      */
     public void bookTicket(Seat seat)
     {
-        if (seat.getRank() == FIRSTCLASS) 
+        if (seat.getRank() == FIRSTCLASS)
         {
-            if(getAvailableCheck(FIRSTCLASS)) {
+            if (getAvailableCheck(FIRSTCLASS))
+            {
                 seats.add(seat);
-            } else {
+            } else
+            {
                 System.out.println("First class is full");
             }
-        } else if (seat.getRank() == ECONOMYCLASS) {
-            if(getAvailableCheck(ECONOMYCLASS)) {
+        } else if (seat.getRank() == ECONOMYCLASS)
+        {
+            if (getAvailableCheck(ECONOMYCLASS))
+            {
                 seats.add(seat);
-            } else {
+            } else
+            {
                 System.out.println("Economy Class is full");
             }
         }
@@ -79,8 +106,9 @@ public class Plane implements Serializable
 
     /**
      * Checks if the requested Rank is available
+     *
      * @param rank
-     * @return 
+     * @return
      */
     public boolean getAvailableCheck(int rank)
     {
@@ -97,6 +125,56 @@ public class Plane implements Serializable
     }
 
     //<editor-fold defaultstate="collapsed" desc="Getters & Setters">
+    public Airport getHomebase()
+    {
+        return homebase;
+    }
+
+    public void setHomebase(Airport homebase)
+    {
+        this.homebase = homebase;
+    }
+
+    public int getNrOfFA()
+    {
+        return nrOfFA;
+    }
+
+    public void setNrOfFA(int nrOfFA)
+    {
+        this.nrOfFA = nrOfFA;
+    }
+
+    public int getNrOfEA()
+    {
+        return nrOfEA;
+    }
+
+    public void setNrOfEA(int nrOfEA)
+    {
+        this.nrOfEA = nrOfEA;
+    }
+
+    public int getNrOfF()
+    {
+        return nrOfF;
+    }
+
+    public void setNrOfF(int nrOfF)
+    {
+        this.nrOfF = nrOfF;
+    }
+
+    public int getNrOfE()
+    {
+        return nrOfE;
+    }
+
+    public void setNrOfE(int nrOfE)
+    {
+        this.nrOfE = nrOfE;
+    }
+
     public long getId()
     {
         return id;
@@ -117,7 +195,7 @@ public class Plane implements Serializable
         this.callsign = callsign;
     }
 
-    public ArrayList<Seat> getSeats()
+    public List<Seat> getSeats()
     {
         return seats;
     }
@@ -125,26 +203,6 @@ public class Plane implements Serializable
     public void setSeats(ArrayList<Seat> seats)
     {
         this.seats = seats;
-    }
-
-    public int getNrOffF()
-    {
-        return nrOfF;
-    }
-
-    public void setNrOffF(int nrOffF)
-    {
-        this.nrOfF = nrOffF;
-    }
-
-    public int getNrOffE()
-    {
-        return nrOfE;
-    }
-
-    public void setNrOffE(int nrOffE)
-    {
-        this.nrOfE = nrOffE;
     }
 //</editor-fold>
 }

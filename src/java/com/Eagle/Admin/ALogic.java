@@ -1,6 +1,7 @@
 package com.Eagle.Admin;
 
 //Admin Logic
+import com.Eagle.Model.Airport;
 import com.Eagle.Model.Plane;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -22,12 +23,19 @@ public class ALogic
         em.persist(plane);
     }
 
-    public void removePlane(long id)
+    public void removePlane(Plane plane)
     {
-//        em.getTransaction().begin();
-        em.remove(em.find(Plane.class, id));
-//        em.getTransaction().commit();
+        em.remove(plane);
+    }
 
+    public void persistAirport(Airport airport)
+    {
+        em.persist(airport);
+    }
+    
+    public void removeAirport(Airport airport)
+    {
+        em.remove(airport);
     }
 
 }
