@@ -24,7 +24,6 @@ public class ConstructionYard
     String description = "";
     List<Plane> hangar = new ArrayList();
     Plane plane;
-    List<Plane> allPlanes;
 
     public void buildAirport()
     {
@@ -46,10 +45,15 @@ public class ConstructionYard
         hangar.remove(plane);
     }
 
+    public Plane getOnePlane()
+    {
+        return logic.getOnePlane(1L);
+    }
+
     //<editor-fold defaultstate="collapsed" desc="Getters & Setters">
     public List<Plane> getAllPlanes()
     {
-        return allPlanes;
+        return logic.getAllPlanes();
     }
 
     public Airport getAirport()

@@ -34,7 +34,13 @@ public class Hangar
 
     public void removePlane()
     {
+        
         logic.removePlane(plane);
+    }
+    
+     public void findPlane()
+    {
+        plane = logic.getOnePlane(id);
     }
 
     //<editor-fold defaultstate="collapsed" desc="Getters & Setters">
@@ -46,16 +52,6 @@ public class Hangar
     public void setPlane(Plane plane)
     {
         this.plane = plane;
-    }
-
-    public ALogic getLogic()
-    {
-        return logic;
-    }
-
-    public void setLogic(ALogic logic)
-    {
-        this.logic = logic;
     }
 
     public long getId()

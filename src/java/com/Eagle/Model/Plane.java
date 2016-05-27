@@ -39,10 +39,11 @@ public class Plane implements Serializable
 
     /**
      * Standard Constructor, includes Homebase
+     *
      * @param callsign
      * @param homebase
      * @param nrOfF
-     * @param nrOfE 
+     * @param nrOfE
      */
     public Plane(String callsign, Airport homebase, int nrOfF, int nrOfE)
     {
@@ -51,7 +52,7 @@ public class Plane implements Serializable
         this.nrOfF = nrOfF;
         this.nrOfE = nrOfE;
     }
-    
+
     /**
      * Standard Constructor, does not Include Homebase
      *
@@ -205,4 +206,11 @@ public class Plane implements Serializable
         this.seats = seats;
     }
 //</editor-fold>
+
+    @Override
+    public String toString()
+    {
+        return "Plane{" + "id=" + id + ", callsign=" + callsign + ", homebase=" + homebase + ", seats=" + seats + ", nrOfFA=" + nrOfFA + ", nrOfEA=" + nrOfEA + ", nrOfF=" + nrOfF + ", nrOfE=" + nrOfE + '}';
+    }
+
 }

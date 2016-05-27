@@ -11,14 +11,14 @@
             <h:form>
                 Name of airport: <h:inputText value="Los angeles"/>
                 <br/>
-                <h:selectOneMenu value="Plan1">
-                    <!--                    <f:selectItem itemValue="Plan1"/>
-                                        <f:selectItem itemValue="Plan2"/>-->
-                    <f:selectItems itemValue="#{constructionYard.allPlanes}"/>
-            </h:selectOneMenu>
-            <br/>
-            <h:commandButton value="Add"/>
-        </h:form>
-    </ui:define>
-</ui:composition>
+
+                <br/>
+                <h:commandButton value="Add"/>
+            </h:form>
+            <ui:repeat var="planes" value="#{constructionYard.allPlanes}">
+                #{planes.callsign}
+                <br/>
+            </ui:repeat>
+        </ui:define>
+    </ui:composition>
 </html>

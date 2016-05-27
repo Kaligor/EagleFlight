@@ -19,7 +19,7 @@ public class Airport implements Serializable
 
     private String name;
 
-    @OneToMany(mappedBy = "homebase")
+    @OneToMany
     List<Plane> hangar;
 
     private String description;
