@@ -3,22 +3,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:composition template="template.xhtml">
         <ui:define name="content">
             <h3>Add a new airport</h3>
             <h:form>
-                Name of airport: <h:inputText value="Los angeles"/>
+                Name of airport: <h:inputText/>
                 <br/>
-
+                <c:set var="planes" value="#{constructionYard.allPlanes}" />
+                Planes:
+                <h:selectManyListbox>
+                    <f:selectItems value="#{planes}" var="plane" itemValue="#{plane.id}" itemLabel="#{plane.callsign}"/>
+                </h:selectManyListbox>
                 <br/>
                 <h:commandButton value="Add"/>
             </h:form>
-            <ui:repeat var="planes" value="#{constructionYard.allPlanes}">
-                #{planes.callsign}
-                <br/>
-            </ui:repeat>
         </ui:define>
     </ui:composition>
 </html>
