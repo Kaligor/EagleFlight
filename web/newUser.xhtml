@@ -7,14 +7,15 @@
     <ui:composition template="template.xhtml">
         <ui:define name="content">
             <h:form>
-                <p id="red">#{login.status}</p>
+                Name <br/>
+                <h:inputText value="#{newUser.name}"/> <br/>
+                <p id="red">#{newUser.status}</p>
                 Username <br/>
-                <h:inputText value="#{login.username}"/> <br/>
+                <h:inputText value="#{newUser.username}"/> <br/>
                 Password <br/>
-                <h:inputSecret value="#{login.password}"/> <br/>
-                <h:commandButton value="Submit" action="#{login.logIn()}"/>
+                <h:inputText value="#{newUser.password}"/> <br/>
+                <h:commandButton value="Submit" action="#{newUser.newUser()}"/>
             </h:form>
-            <h:button value="Register" outcome="newUser.xhtml"/>
         </ui:define>
     </ui:composition>
 </html>

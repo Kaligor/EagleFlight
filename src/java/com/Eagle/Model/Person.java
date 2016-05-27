@@ -20,6 +20,9 @@ public class Person implements Serializable
     @NotNull
     private String name;
 
+    @NotNull
+    private String password;
+
     @Column(unique = true)
     private String username;
 
@@ -28,23 +31,29 @@ public class Person implements Serializable
 
     /**
      * Normal registrated user
+     *
      * @param name
-     * @param username 
+     * @param username
+     * @param password
+     *
      */
-    public Person(String name, String username)
+    public Person(String name, String username, String password)
     {
         this.name = name;
         this.username = username;
+        this.password = password;
     }
 
     /**
      * User without login
-     * @param name 
+     *
+     * @param name
      */
     public Person(String name)
     {
         this.name = name;
         this.username = generatedUsername();
+        this.password = "1234";
     }
 
     /**
@@ -56,6 +65,7 @@ public class Person implements Serializable
 
     /**
      * Generates usernames for people that do not want to login
+     *
      * @return Eagle+Id
      */
     private String generatedUsername()
@@ -64,6 +74,16 @@ public class Person implements Serializable
     }
 
     //<editor-fold defaultstate="collapsed" desc="Getters & Setters">
+    public String getPassword()
+    {
+        return password;
+    }
+
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
+
     public long getId()
     {
         return id;
