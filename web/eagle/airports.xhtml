@@ -18,8 +18,8 @@
                 <br/>
                 <c:set var="planes" value="#{constructionYard.allPlanes}" />
                 Planes:
-                <h:selectOneMenu value="#{constructionYard.plane}">
-                    <f:selectItems value="#{constructionYard.allPlanes}" var="plane" itemLabel="#{plane.callsign}" itemValue="#{plane.id}"/>
+                <h:selectOneMenu value="#{constructionYard.plane}" converter="PlaneConverter">
+                    <f:selectItems value="#{constructionYard.allPlanes}" var="theplane" itemLabel="#{theplane.callsign}" itemValue="#{theplane}"/>
                 </h:selectOneMenu>
                 <br/>
                 <h:commandButton value="Add" action="#{constructionYard.buildAirport()}"/>
