@@ -56,6 +56,10 @@ public class ConstructionYard implements Serializable
     {
         return logic.refreshAllPlanes();
     }
+    
+    public List<Airport> getAllAirports() {
+        return logic.refreshAllAirports();
+    }
 
     public Airport getAirport()
     {
