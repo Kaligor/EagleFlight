@@ -52,6 +52,7 @@ public class ALogic
         return allPlanes;
     }
 
+    
     public void removePlane(Plane plane)
     {
         if (plane != null)
@@ -68,11 +69,11 @@ public class ALogic
     {
         em.persist(airport);
     }
-
+    
     public void updateAirport(Airport newAirport)
     {
         em.merge(newAirport);
-    }
+    }    
 
     public void removeAirport(Airport airport)
     {
