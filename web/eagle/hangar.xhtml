@@ -5,12 +5,13 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="template.xhtml">
         <ui:define name="content">
             <h3>Add a new plane</h3>
-            <h:form>
+            <h:form id="creation">
                 Name of plane: <h:inputText value="#{hangar.callsign}" />
                 <br/>
                 Number of First class Seats  : <h:inputText pt:type="number" pt:min="1" pt:max="200" value="#{hangar.nrOfF}" />
@@ -19,14 +20,48 @@
                 <br/>
                 <h:commandButton value="Add" action="#{hangar.newPlane()}"/>
             </h:form>
-            <br/>
-            <h:form>
-                <c:set var="planes" value="#{constructionYard.allPlanes}" />
-                <h:selectOneListbox>
-                    <f:selectItems value="#{planes}" var="plane" itemValue="#{plane.id}" itemLabel="#{plane.callsign}"/>
-                </h:selectOneListbox>
-                <br/>
-                <h:commandButton value="Remove" action="#{hangar.removePlane()}"/>
+
+            <h:form id="Planeform">
+                <p:growl id="msgs" showDetail="true"/>
+
+                <p:dataTable var="planes" value="#{hangar.list}" editable="true" editMode="cell" widgetVar="cellPlanes">
+                    <p:ajax event="cellEdit" listener="#{hangar.onCellEdit}" update=":Planeform:msgs"/>
+                    <p:ajax event="rowSelect" listener="#{hangar.onRowSelect(event)}" update=":PlaneForm:msgs"/>
+                    <p:ajax event="rowSelect" listener="#{hangar.onRowUnselect(event)}" update=":PlaneForm:msgs"/>
+
+                    <p:column headerText="Id">
+                        <p:cellEditor>
+                            <f:facet name="output"> <h:outputText value="#{planes.id}"/> </f:facet>
+                            <f:facet name="input"> <p:inputText id="modelInput" value="#{planes.id}"/> </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Callsign">
+                        <p:cellEditor>
+                            <f:facet name="output"> <h:outputText value="#{planes.callsign}"/> </f:facet>
+                            <f:facet name="input"> <h:inputText value="#{planes.callsign}" /> </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                    <p:column headerText="First Class">
+                        <p:cellEditor>
+                            <f:facet name="output"> <h:outputText value="#{planes.nrOfFA} / #{planes.nrOfF}"/> </f:facet>
+                            <f:facet name="input"> <h:inputText pt:type="number" pt:min="0" pt:max="#{planes.nrOfF}" value="#{planes.nrOfFA}" /> </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                    <p:column headerText="Economy">
+                        <p:cellEditor>
+                            <f:facet name="output"> <h:outputText value="#{planes.nrOfEA} / #{planes.nrOfE}"/> </f:facet>
+                            <f:facet name="input"> <h:inputText pt:type="number" pt:min="0" pt:max="#{planes.nrOfE}" value="#{planes.nrOfEA}" /> </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                    <p:column headerText="Delete">
+                        <p:commandButton value="Delete" action="#{hangar.removePlane()}"
+                    </p:column>
+
+                </p:dataTable>
             </h:form>
 
         </ui:define>

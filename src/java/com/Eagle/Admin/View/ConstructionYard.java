@@ -3,15 +3,16 @@ package com.Eagle.Admin.View;
 import com.Eagle.Admin.ALogic;
 import com.Eagle.Model.Airport;
 import com.Eagle.Model.Plane;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 @ManagedBean
-@RequestScoped
-public class ConstructionYard
+@ViewScoped
+public class ConstructionYard implements Serializable
 {
 
     @EJB
@@ -27,7 +28,7 @@ public class ConstructionYard
 
     public void buildAirport()
     {
-        logic.persistAirport(new Airport(description, hangar, description));
+        logic.persistAirport(new Airport(name, hangar, description));
     }
 
     public void removeAirport()
@@ -53,7 +54,7 @@ public class ConstructionYard
     //<editor-fold defaultstate="collapsed" desc="Getters & Setters">
     public List<Plane> getAllPlanes()
     {
-        return logic.getAllPlanes();
+        return logic.refreshAllPlanes();
     }
 
     public Airport getAirport()
