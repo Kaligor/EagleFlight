@@ -10,6 +10,20 @@
 
     <ui:composition template="template.xhtml">
         <ui:define name="content">
+            <h3>Add a new airport</h3>
+            <h:form>
+                Name of airport: <h:inputText value="#{constructionYard.name}"/>
+                <br/>
+                Description: <h:inputText value="#{constructionYard.description}"/>
+                <br/>
+                <c:set var="planes" value="#{constructionYard.allPlanes}" />
+                Planes:
+                <h:selectOneMenu value="#{constructionYard.plane}">
+                    <f:selectItems value="#{constructionYard.allPlanes}" var="plane" itemLabel="#{plane.callsign}" itemValue="#{plane.id}"/>
+                </h:selectOneMenu>
+                <br/>
+                <h:commandButton value="Add" action="#{constructionYard.buildAirport()}"/>
+            </h:form>
             <h3>Our airports</h3>
             <h:form id="Airportform">
                 <p:growl id="msgs" showDetail="true"/>
@@ -33,19 +47,17 @@
                             <f:facet name="input"> <p:inputText value="#{airports.description}"/> </f:facet>
                         </p:cellEditor>
                     </p:column>
+                    <p:column headerText="Airplanes">
+                        <p:cellEditor>
+                            <f:facet name="output"> <h:outputText value="#{hangar.plane.callsign}"/> </f:facet>
+                            <f:facet name="input">
+                                <h:selectOneMenu value="#{constructionYard.plane}" converter="PlaneConverter">
+                                    <f:selectItems value="#{constructionYard.allPlanes}" var="plan" itemLabel="#{plan.callsign}" itemValue="#{plan}" />
+                                </h:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>                  
                 </p:dataTable>
-            </h:form>
-            <h3>Add a new airport</h3>
-            <h:form>
-                Name of airport: <h:inputText value="#{constructionYard.name}"/>
-                <br/>
-                Description: <h:inputText value="#{constructionYard.description}"/>
-                <br/>
-                <c:set var="planes" value="#{constructionYard.allPlanes}" />
-                Planes:
-
-                <br/>
-                <h:commandButton value="Add" action="#{constructionYard.buildAirport()}"/>
             </h:form>
         </ui:define>
     </ui:composition>

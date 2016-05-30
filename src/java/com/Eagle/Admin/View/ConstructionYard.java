@@ -27,7 +27,7 @@ public class ConstructionYard implements Serializable
     Airport airport;
     String name;
     String description = "";
-    List<Plane> hangar = new ArrayList();
+    List<Plane> hangar;
     Plane plane;
     List<Airport> list;
     
@@ -35,6 +35,7 @@ public class ConstructionYard implements Serializable
     public void init()
     {
         list = logic.refreshAllAirports();
+        hangar = logic.refreshAllPlanes();
     }
 
     public void buildAirport()
@@ -84,7 +85,7 @@ public class ConstructionYard implements Serializable
     //<editor-fold defaultstate="collapsed" desc="Getters & Setters">
     public List<Plane> getAllPlanes()
     {
-        return logic.refreshAllPlanes();
+        return hangar;
     }
     
     public List<Airport> getAllAirports() {
