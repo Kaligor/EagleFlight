@@ -3,22 +3,49 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="template.xhtml">
         <ui:define name="content">
+            <h3>Our airports</h3>
+            <h:form id="Airportform">
+                <p:growl id="msgs" showDetail="true"/>
+                <p:dataTable var="airports" value="#{constructionYard.list}" editable="true" editMode="cell" widgetVar="cellAirports">
+                    <p:ajax event="cellEdit" listener="#{constructionYard.onCellEdit}" update=":Airportform:msgs"/>
+                    <p:column headerText="Id">
+                        <p:cellEditor>
+                            <f:facet name="output"> <h:outputText value="#{airports.id}"/> </f:facet>
+                            <f:facet name="input"> <p:inputText value="#{airports.id}"/> </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="Name">
+                        <p:cellEditor>
+                            <f:facet name="output"> <h:outputText value="#{airports.name}"/> </f:facet>
+                            <f:facet name="input"> <p:inputText value="#{airports.name}"/> </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="Description">
+                        <p:cellEditor>
+                            <f:facet name="output"> <h:outputText value="#{airports.description}"/> </f:facet>
+                            <f:facet name="input"> <p:inputText value="#{airports.description}"/> </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
             <h3>Add a new airport</h3>
             <h:form>
-                Name of airport: <h:inputText/>
+                Name of airport: <h:inputText value="#{constructionYard.name}"/>
+                <br/>
+                Description: <h:inputText value="#{constructionYard.description}"/>
                 <br/>
                 <c:set var="planes" value="#{constructionYard.allPlanes}" />
                 Planes:
-                <h:selectManyListbox>
-                    <f:selectItems value="#{planes}" var="plane" itemValue="#{plane.id}" itemLabel="#{plane.callsign}"/>
-                </h:selectManyListbox>
+
                 <br/>
-                <h:commandButton value="Add"/>
+                <h:commandButton value="Add" action="#{constructionYard.buildAirport()}"/>
             </h:form>
         </ui:define>
     </ui:composition>
