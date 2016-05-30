@@ -21,6 +21,7 @@ public class ALogic
     EntityManager em;
 
     List<Plane> allPlanes;
+    List<Airport> allAirports;
 
     public ALogic()
     {
@@ -50,6 +51,13 @@ public class ALogic
         Query query = em.createNativeQuery("SELECT * FROM plane", Plane.class);
         allPlanes = query.getResultList();
         return allPlanes;
+    }
+    
+    public List<Airport> refreshAllAirports()
+    {
+        Query query = em.createNativeQuery("SELECT * FROM airport", Airport.class);
+        allAirports = query.getResultList();
+        return allAirports;
     }
 
     public void removePlane(Plane plane)
