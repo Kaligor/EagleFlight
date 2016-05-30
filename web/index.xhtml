@@ -2,11 +2,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="template.xhtml">
         <ui:define name="content">
-            Flyg med Eagle's till California <br/>
-            våra fantastiska erbjudanden
+            <h2 style="font-family: Brush Script MT,cursive; font-size: 32px;">Welcome to our fantastic destinations</h2>
+            <p:lightBox styleClass="imagebox" id="lighbox1">
+                <h:outputLink value="#{resource['images/eagle1.jpg']}" title="Overwatch">  
+                    <h:graphicImage library="images" name="eagle1.jpg" id="eagle11" style="height: 80px; width: 100px; margin: 5px; border: 5px inset antiquewhite" />  
+                </h:outputLink>
+                <h:outputLink value="#{resource['images/eagle2.jpg']}" title="Warcraft III">  
+                    <h:graphicImage library="images" name="eagle2.jpg" id="eagle2" style="height: 80px; width: 100px; margin: 5px; border: 5px inset antiquewhite" />  
+                </h:outputLink>
+                <h:outputLink value="#{resource['images/eagle3.jpg']}" title="Skyrim">  
+                    <h:graphicImage library="images" name="eagle3.jpg" id="eagle3" style="height: 80px; width: 100px; margin: 5px; border: 5px inset antiquewhite" />  
+                </h:outputLink>
+            </p:lightBox>
         </ui:define>
     </ui:composition>
 </html>
