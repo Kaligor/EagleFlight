@@ -34,12 +34,11 @@ public class ALogic
     {
         em.persist(plane);
     }
-    
+
     public void updatePlane(Plane newPlane)
     {
         em.merge(newPlane);
     }
-   
 
     public Plane getOnePlane(Long id)
     {
@@ -52,7 +51,19 @@ public class ALogic
         allPlanes = query.getResultList();
         return allPlanes;
     }
+
+    public void removePlane(Plane plane)
+    {
+        if (plane != null)
+        {
+
+            em.remove(em.find(Plane.class, plane.getId()));
+        }
+    }
     
+//</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Construction Yard">
     public List<Airport> refreshAllAirports()
     {
         Query query = em.createNativeQuery("SELECT * FROM airport", Airport.class);
@@ -60,17 +71,6 @@ public class ALogic
         return allAirports;
     }
 
-    public void removePlane(Plane plane)
-    {
-        if (plane != null)
-        {
-            
-            em.remove(em.find(Plane.class, plane.getId()));
-        }
-    }
-//</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="Construction Yard">
     public void persistAirport(Airport airport)
     {
         em.persist(airport);
@@ -99,7 +99,7 @@ public class ALogic
     {
         em.persist(person);
     }
-    
+
     public Person findOneUser(String username) throws UserException
     {
         Query query = em.createNativeQuery("SELECT * FROM person WHERE = '" + username + "'", Person.class);
@@ -112,14 +112,14 @@ public class ALogic
             throw new UserException("No such User");
         }
     }
-    
+
     public List<Person> getAllUser()
     {
         Query query = em.createNativeQuery("SELECT * FROM person", Person.class);
         List<Person> list = query.getResultList();
         return list;
     }
-    
+
     public void removePerson(Person person)
     {
         em.remove(person);
