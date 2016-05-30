@@ -26,8 +26,8 @@
 
                 <p:dataTable var="planes" value="#{hangar.list}" editable="true" editMode="cell" widgetVar="cellPlanes">
                     <p:ajax event="cellEdit" listener="#{hangar.onCellEdit}" update=":Planeform:msgs"/>
-                    <p:ajax event="rowSelect" listener="#{hangar.onRowSelect(event)}" update=":PlaneForm:msgs"/>
-                    <p:ajax event="rowSelect" listener="#{hangar.onRowUnselect(event)}" update=":PlaneForm:msgs"/>
+<!--                    <p:ajax event="rowSelect" listener="#{hangar.onRowSelect(event)}" update=":PlaneForm:msgs"/>
+                    <p:ajax event="rowUnselect" listener="#{hangar.onRowUnselect(event)}" update=":PlaneForm:msgs"/>-->
 
                     <p:column headerText="Id">
                         <p:cellEditor>
@@ -57,9 +57,28 @@
                         </p:cellEditor>
                     </p:column>
                     
-                    <p:column headerText="Delete">
-                        <p:commandButton value="Delete" action="#{hangar.removePlane()}"
+                    <p:column headerText="Home Base">
+                        <p:cellEditor>
+                            <f:facet name="output"> <h:outputText value="#{planes.homebase.name}"/> </f:facet>
+                            <f:facet name="input"> 
+                                <h:selectOneMenu value="#{planes.homebase}" converter="AirportConverter">
+                                    <f:selectItems value="#{hangar.allAirports}" var="airports" itemLabel="#{airports.name}" itemValue="#{airports}" />
+                                </h:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
                     </p:column>
+                    
+                    <p:column headerText="Seats">
+                        <p:rowToggler/>
+                    </p:column>
+                    
+                    <p:rowExpansion>
+                        <h:dataTable value="#{planes.seats}" var="seat">
+                            <h:column>
+                                #{seat}
+                            </h:column>
+                        </h:dataTable>
+                    </p:rowExpansion>
 
                 </p:dataTable>
             </h:form>

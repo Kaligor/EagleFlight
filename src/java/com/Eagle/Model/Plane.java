@@ -3,6 +3,7 @@ package com.Eagle.Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -212,5 +213,38 @@ public class Plane implements Serializable
     {
         return "Plane{" + "id=" + id + ", callsign=" + callsign + ", homebase=" + homebase + ", seats=" + seats + ", nrOfFA=" + nrOfFA + ", nrOfEA=" + nrOfEA + ", nrOfF=" + nrOfF + ", nrOfE=" + nrOfE + '}';
     }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 3;
+        hash = 53 * hash + (int) (this.id ^ (this.id >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+        {
+            return true;
+        }
+        if (obj == null)
+        {
+            return false;
+        }
+        if (getClass() != obj.getClass())
+        {
+            return false;
+        }
+        final Plane other = (Plane) obj;
+        if (this.id != other.id)
+        {
+            return false;
+        }
+        return true;
+    }
+
+   
 
 }

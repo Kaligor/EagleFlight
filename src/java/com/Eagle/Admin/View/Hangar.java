@@ -1,6 +1,7 @@
 package com.Eagle.Admin.View;
 
 import com.Eagle.Admin.ALogic;
+import com.Eagle.Model.Airport;
 import com.Eagle.Model.Plane;
 import java.io.Serializable;
 import java.util.List;
@@ -33,11 +34,13 @@ public class Hangar implements Serializable
 
     //TODO: change from getList to local list
     List<Plane> list;
+    List<Airport> allAirports;
 
     @PostConstruct
     public void init()
     {
         list = logic.refreshAllPlanes();
+        allAirports = logic.refreshAllAirports();
     }
 
     public void newPlane()
@@ -50,17 +53,24 @@ public class Hangar implements Serializable
     public void editPlane(int index)
     {
         logic.updatePlane(list.get(index));
+        refreshList();
     }
 
-    public void removePlane()
+    public void removePlane(int index)
     {
-        
-//        logic.removePlane(list.get(1));
+
+        logic.removePlane(list.get(index - 1));
+        refreshList();
     }
 
     public void findPlane()
     {
         plane = logic.getOnePlane(id);
+    }
+
+    public void getAllAvailableAirports()
+    {
+        allAirports = logic.refreshAllAirports();
     }
 
     public void onRowEdit(RowEditEvent event)
@@ -88,27 +98,37 @@ public class Hangar implements Serializable
             FacesContext.getCurrentInstance().addMessage(null, msg);
 
             editPlane(event.getRowIndex());
+
         }
     }
 
-    public void onRowSelect(SelectEvent event)
-    {
-        FacesMessage msg = new FacesMessage("Plane Selected", ((Plane) event.getObject()).getCallsign());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
-
-    public void onRowUnselect(UnselectEvent event)
-    {
-        FacesMessage msg = new FacesMessage("Plane Unselected", ((Plane) event.getObject()).getCallsign());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
-
+//    public void onRowSelect(SelectEvent event)
+//    {
+//        FacesMessage msg = new FacesMessage("Plane Selected", ((Plane) event.getObject()).getCallsign());
+//        FacesContext.getCurrentInstance().addMessage(null, msg);
+//    }
+//
+//    public void onRowUnselect(UnselectEvent event)
+//    {
+//        FacesMessage msg = new FacesMessage("Plane Unselected", ((Plane) event.getObject()).getCallsign());
+//        FacesContext.getCurrentInstance().addMessage(null, msg);
+//    }
     public void refreshList()
     {
         list = logic.refreshAllPlanes();
     }
 
     //<editor-fold defaultstate="collapsed" desc="Getters & Setters">
+    public List<Airport> getAllAirports()
+    {
+        return allAirports = logic.refreshAllAirports();
+    }
+
+    public void setAllAirports(List<Airport> allAirports)
+    {
+        this.allAirports = allAirports;
+    }
+
     public List<Plane> getList()
     {
         return list;

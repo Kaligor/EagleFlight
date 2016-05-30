@@ -26,7 +26,7 @@ public class ALogic
     public ALogic()
     {
         allPlanes = new ArrayList<>();
-
+        allAirports = new ArrayList<>();
     }
 
     //<editor-fold defaultstate="collapsed" desc="Hangar">
@@ -60,25 +60,30 @@ public class ALogic
             em.remove(em.find(Plane.class, plane.getId()));
         }
     }
-    
+
 //</editor-fold>
-
+    
     //<editor-fold defaultstate="collapsed" desc="Construction Yard">
-    public List<Airport> refreshAllAirports()
-    {
-        Query query = em.createNativeQuery("SELECT * FROM airport", Airport.class);
-        allAirports = query.getResultList();
-        return allAirports;
-    }
-
     public void persistAirport(Airport airport)
     {
         em.persist(airport);
     }
 
+    public void updateAirport(Airport newAirport)
+    {
+        em.merge(newAirport);
+    }
+
     public void removeAirport(Airport airport)
     {
         em.remove(airport);
+    }
+
+    public List<Airport> refreshAllAirports()
+    {
+        Query query = em.createNativeQuery("SELECT * FROM airport", Airport.class);
+        allAirports = query.getResultList();
+        return allAirports;
     }
 //</editor-fold>
 
