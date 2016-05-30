@@ -52,7 +52,7 @@
                             <f:facet name="output"> <h:outputText value="#{hangar.plane.callsign}"/> </f:facet>
                             <f:facet name="input">
                                 <h:selectOneMenu value="#{constructionYard.plane}" converter="PlaneConverter">
-                                    <f:selectItems value="#{constructionYard.allPlanes}" var="plan" itemLabel="#{plan.callsign}" itemValue="#{plan}" />
+                                    <f:selectItems value="#{constructionYard.allPlanes}" var="theplane" itemLabel="#{theplane.callsign}" itemValue="#{theplane}" />
                                 </h:selectOneMenu>
                             </f:facet>
                         </p:cellEditor>
