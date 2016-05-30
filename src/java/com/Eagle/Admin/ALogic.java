@@ -57,7 +57,8 @@ public class ALogic
     {
         if (plane != null)
         {
-            em.remove(plane);
+            
+            em.remove(em.find(Plane.class, plane.getId()));
         }
     }
 //</editor-fold>
