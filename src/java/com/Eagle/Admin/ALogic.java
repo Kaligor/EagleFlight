@@ -105,6 +105,11 @@ public class ALogic
     {
         em.persist(person);
     }
+    
+    public void updatePerson(Person person)
+    {
+        em.merge(person);
+    }
 
     public Person findOneUser(String username) throws UserException
     {

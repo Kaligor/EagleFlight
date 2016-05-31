@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="template.xhtml">
+        <ui:define name="content">
+            
+            <h:form id="Usersform">
+                <p:growl id="msgs" showDetail="true"/>
+
+                <p:dataTable var="users" value="#{administration.allUsers}" editable="true" editMode="cell" widgetVar="cellUsers">
+                    <p:ajax event="cellEdit" listener="#{hangar.onCellEdit}" update=":Usersform:msgs"/>
+
+                    <p:column headerText="Id">
+                        <p:cellEditor>
+                            <f:facet name="output"> <h:outputText value="#{users.id}"/> </f:facet>
+                            <f:facet name="input"> <p:inputText id="modelInput" value="#{users.id}"/> </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Name">
+                        <p:cellEditor>
+                            <f:facet name="output"> <h:outputText value="#{users.name}"/> </f:facet>
+                            <f:facet name="input"> <h:inputText value="#{users.name}" /> </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                    <p:column headerText="Username">
+                        <p:cellEditor>
+                            <f:facet name="output"> <h:outputText value="#{users.username}"/> </f:facet>
+                            <f:facet name="input"> <h:inputText value="#{users.username}" /> </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                </p:dataTable>
+            </h:form>
+            
+        </ui:define>
+    </ui:composition>
+</html>

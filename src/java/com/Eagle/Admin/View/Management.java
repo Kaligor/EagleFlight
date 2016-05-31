@@ -6,10 +6,10 @@ import com.Eagle.Model.Plane;
 import java.util.Date;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class Management 
 {
     
