@@ -23,7 +23,7 @@ public class ConstructionYard implements Serializable
 
     long id;
 
-    Airport airport;
+//    Airport airport;
     String name;
     String description = "";
     List<Plane> hangar;
@@ -43,7 +43,7 @@ public class ConstructionYard implements Serializable
         refreshList();
     }
 
-    public void removeAirport()
+    public void removeAirport(Airport airport)
     {
         logic.removeAirport(airport);
         refreshList();
@@ -73,6 +73,11 @@ public class ConstructionYard implements Serializable
     {
         list = logic.refreshAllAirports();
         hangar = logic.refreshAllPlanes();
+    }
+    
+    public boolean checkPlaneToAirport(int planeID, int AirportID)
+    {
+        return planeID == AirportID;
     }
 
     public void addPlane(int index)
@@ -107,15 +112,15 @@ public class ConstructionYard implements Serializable
         this.list = list;
     }
 
-    public Airport getAirport()
-    {
-        return airport;
-    }
-
-    public void setAirport(Airport airport)
-    {
-        this.airport = airport;
-    }
+//    public Airport getAirport()
+//    {
+//        return airport;
+//    }
+//
+//    public void setAirport(Airport airport)
+//    {
+//        this.airport = airport;
+//    }
 
     public long getId()
     {

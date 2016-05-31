@@ -4,7 +4,9 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      
 
     <ui:composition template="template.xhtml">
         <ui:define name="content">
@@ -39,13 +41,14 @@
                             <f:facet name="input"> <p:inputText value="#{airports.description}"/> </f:facet>
                         </p:cellEditor>
                     </p:column>
-
-                    <p:column headerText="Planes">
+               
+                    <p:column headerText="Planes" style="width:40px">
                         <p:rowToggler/>
                     </p:column>
-
                     <p:rowExpansion>
-                        #{airports.printPlanes()}
+                        <ui:repeat value="#{constructionYard.allPlanes}" var="planes">
+                            <h:outputText value="#{planes.callsign} " rendered="#{constructionYard.checkPlaneToAirport(planes.homebase.id, airports.id)}"/>
+                        </ui:repeat>
                     </p:rowExpansion>
 
                 </p:dataTable>
