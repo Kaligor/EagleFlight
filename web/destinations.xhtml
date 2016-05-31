@@ -9,20 +9,17 @@
     <ui:composition template="template.xhtml">
         <ui:define name="content">
             <h3>Welcome to our destinations</h3>
-            <c:set var="flights" value="#{['F_Los Angeles','F_San Francisco', 'F_Kiruna']}"/>
+            <c:set var="flights" value="#{management.allFlights}"/>
             <ui:repeat var="flight" value="#{flights}">
                 <h:panelGrid id="panel" columns="2" border="0"
                              cellpadding="5" cellspacing="1">
                     <f:facet name="header">
-                        <h:graphicImage name="images/flight.jpg" width="50" height="30" />
+                        <h:graphicImage name="images/flight#{flight.imageID}.jpg" width="50" height="30" style="float: left;"/>
                     </f:facet>
-                    <h:outputLink value="booking.xhtml?id=#{flight}">#{flight}</h:outputLink>
-                    <h:outputText value="Leaves 12:45"/>
-                    <h:outputText value="From airport"/>
-                    <h:outputText value="To airport"/>
-                    <f:facet name="footer">
-                        <h:outputText value="2 free seats"/>
-                    </f:facet>
+                    <h:outputLink value="booking.xhtml?id=#{flight.id}">Flight. #{flight.id}</h:outputLink>
+                    <h:outputText value="Leaves: #{flight.takeoff}"/>
+                    <h:outputText value="From: #{flight.home}"/>
+                    <h:outputText value="To: #{flight.destination}"/>
                 </h:panelGrid>
                 <hr/>
             </ui:repeat>
