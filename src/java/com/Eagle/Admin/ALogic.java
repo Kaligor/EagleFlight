@@ -22,11 +22,13 @@ public class ALogic
 
     List<Plane> allPlanes;
     List<Airport> allAirports;
+    List<Flight> allFlights;
 
     public ALogic()
     {
         allPlanes = new ArrayList<>();
         allAirports = new ArrayList<>();
+        allFlights = new ArrayList<>();
     }
 
     //<editor-fold defaultstate="collapsed" desc="Hangar">
@@ -97,6 +99,13 @@ public class ALogic
     public void removeFlight(Flight flight)
     {
         em.remove(flight);
+    }
+    
+    public List<Flight> refreshAllFlights() 
+    {
+        Query query = em.createNativeQuery("SELECT * FROM fligth", Flight.class);
+        allFlights = query.getResultList();
+        return allFlights;
     }
 //</editor-fold>
 
