@@ -111,7 +111,7 @@ public class ALogic
     
     public List<Flight> refreshAllFlights() 
     {
-        Query query = em.createNativeQuery("SELECT * FROM fligth", Flight.class);
+        Query query = em.createNativeQuery("SELECT * FROM flight", Flight.class);
         allFlights = query.getResultList();
         return allFlights;
     }

@@ -4,6 +4,7 @@ import com.Eagle.Admin.ALogic;
 import com.Eagle.Model.Flight;
 import com.Eagle.Model.Plane;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -40,6 +41,11 @@ public class Management
     }
 
     //<editor-fold defaultstate="collapsed" desc="Getters & Setters">
+    public List<Flight> getAllFlights()
+    {
+        return logic.refreshAllFlights();
+    }
+    
     public Flight getFlight()
     {
         return flight;
