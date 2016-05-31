@@ -3,9 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="template.xhtml">
@@ -15,12 +13,6 @@
                 Name of airport: <h:inputText value="#{constructionYard.name}"/>
                 <br/>
                 Description: <h:inputText value="#{constructionYard.description}"/>
-                <br/>
-                <c:set var="planes" value="#{constructionYard.allPlanes}" />
-                Planes:
-                <h:selectOneMenu value="#{constructionYard.plane}" converter="PlaneConverter">
-                    <f:selectItems value="#{constructionYard.allPlanes}" var="theplane" itemLabel="#{theplane.callsign}" itemValue="#{theplane}"/>
-                </h:selectOneMenu>
                 <br/>
                 <h:commandButton value="Add" action="#{constructionYard.buildAirport()}"/>
             </h:form>
@@ -47,16 +39,15 @@
                             <f:facet name="input"> <p:inputText value="#{airports.description}"/> </f:facet>
                         </p:cellEditor>
                     </p:column>
-                    <p:column headerText="Airplanes">
-                        <p:cellEditor>
-                            <f:facet name="output"> <h:outputText value="#{hangar.plane.callsign}"/> </f:facet>
-                            <f:facet name="input">
-                                <h:selectOneMenu value="#{constructionYard.plane}" converter="PlaneConverter">
-                                    <f:selectItems value="#{constructionYard.allPlanes}" var="theplane" itemLabel="#{theplane.callsign}" itemValue="#{theplane}" />
-                                </h:selectOneMenu>
-                            </f:facet>
-                        </p:cellEditor>
-                    </p:column>                  
+
+                    <p:column headerText="Planes">
+                        <p:rowToggler/>
+                    </p:column>
+
+                    <p:rowExpansion>
+                        #{airports.printPlanes()}
+                    </p:rowExpansion>
+
                 </p:dataTable>
             </h:form>
         </ui:define>

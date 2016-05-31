@@ -3,8 +3,8 @@ package com.Eagle.Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,8 +20,8 @@ public class Airport implements Serializable
 
     private String name;
 
-    @OneToMany
-    List<Plane> hangar;
+    @OneToMany(mappedBy = "homebase", fetch = FetchType.EAGER)
+    List<Plane> planes;
 
     private String description;
 
@@ -41,7 +41,7 @@ public class Airport implements Serializable
     public Airport(String name, ArrayList<Plane> hangar)
     {
         this.name = name;
-        this.hangar = hangar;
+        this.planes = hangar;
     }
 
     /**
@@ -54,11 +54,23 @@ public class Airport implements Serializable
     public Airport(String name, List<Plane> hangar, String description)
     {
         this.name = name;
-        this.hangar = hangar;
+        this.planes = hangar;
         this.description = description;
     }
 
-    //<editor-fold defaultstate="collapsed" desc="Getters & Setters">
+    public String printPlanes()
+    {
+        String returnValue = "";
+
+        for (Plane item : planes)
+        {
+            returnValue += item.getCallsign() + " \n";
+        }
+
+        return returnValue;
+    }
+
+//<editor-fold defaultstate="collapsed" desc="Getters & Setters">
     public String getDescription()
     {
         return description;
@@ -89,21 +101,21 @@ public class Airport implements Serializable
         this.name = name;
     }
 
-    public List<Plane> getHangar()
+    public List<Plane> getPlanes()
     {
-        return hangar;
+        return planes;
     }
 
-    public void setHangar(ArrayList<Plane> hangar)
+    public void setPlanes(ArrayList<Plane> hangar)
     {
-        this.hangar = hangar;
+        this.planes = hangar;
     }
 //</editor-fold>
 
     @Override
     public String toString()
     {
-        return "Airport{" + "Id=" + Id + ", name=" + name + ", hangar=" + hangar + ", description=" + description + '}';
+        return "Airport{" + "Id=" + Id + ", name=" + name + ", hangar=" + planes + ", description=" + description + '}';
     }
 
     @Override

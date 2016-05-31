@@ -42,8 +42,9 @@ public class ALogic
         em.merge(newPlane);
     }
 
-    public Plane getOnePlane(Long id)
+    public Plane findOnePlane(Long id)
     {
+        
         return em.find(Plane.class, id);
     }
 
@@ -87,6 +88,13 @@ public class ALogic
         Query query = em.createNativeQuery("SELECT * FROM airport", Airport.class);
         allAirports = query.getResultList();
         return allAirports;
+    }
+    
+    public Airport findOneAirport(Long index) {
+        Query query = em.createNativeQuery("SELECT * FROM airport WHERE id='" + index + "'", Airport.class);
+        List<Airport> list = query.getResultList();
+        System.out.println(list.get(0));
+        return list.get(0);
     }
 //</editor-fold>
 

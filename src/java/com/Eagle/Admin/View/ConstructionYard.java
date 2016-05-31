@@ -4,7 +4,6 @@ import com.Eagle.Admin.ALogic;
 import com.Eagle.Model.Airport;
 import com.Eagle.Model.Plane;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -30,7 +29,7 @@ public class ConstructionYard implements Serializable
     List<Plane> hangar;
     Plane plane;
     List<Airport> list;
-    
+
     @PostConstruct
     public void init()
     {
@@ -41,18 +40,21 @@ public class ConstructionYard implements Serializable
     public void buildAirport()
     {
         logic.persistAirport(new Airport(name, hangar, description));
+        refreshList();
     }
 
     public void removeAirport()
     {
         logic.removeAirport(airport);
+        refreshList();
     }
-    
+
     public void editAirport(int index)
     {
         logic.updateAirport(list.get(index));
+        refreshList();
     }
-    
+
     public void onCellEdit(CellEditEvent event)
     {
         Object oldValue = event.getOldValue();
@@ -67,9 +69,16 @@ public class ConstructionYard implements Serializable
         }
     }
 
-    public void addPlane()
+    public void refreshList()
     {
-        hangar.add(plane);
+        list = logic.refreshAllAirports();
+        hangar = logic.refreshAllPlanes();
+    }
+
+    public void addPlane(int index)
+    {
+        hangar.add(hangar.get(index));
+
     }
 
     public void removePlane()
@@ -77,18 +86,14 @@ public class ConstructionYard implements Serializable
         hangar.remove(plane);
     }
 
-    public Plane getOnePlane()
-    {
-        return logic.getOnePlane(1L);
-    }
-
     //<editor-fold defaultstate="collapsed" desc="Getters & Setters">
     public List<Plane> getAllPlanes()
     {
         return hangar;
     }
-    
-    public List<Airport> getAllAirports() {
+
+    public List<Airport> getAllAirports()
+    {
         return logic.refreshAllAirports();
     }
 
@@ -101,7 +106,7 @@ public class ConstructionYard implements Serializable
     {
         this.list = list;
     }
-    
+
     public Airport getAirport()
     {
         return airport;

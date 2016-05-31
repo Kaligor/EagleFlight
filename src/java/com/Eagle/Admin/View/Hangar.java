@@ -63,9 +63,9 @@ public class Hangar implements Serializable
         refreshList();
     }
 
-    public void findPlane()
+    public void findPlane(long index)
     {
-        plane = logic.getOnePlane(id);
+        plane = logic.findOnePlane(index);
     }
 
     public void getAllAvailableAirports()

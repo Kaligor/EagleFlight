@@ -26,8 +26,6 @@
 
                 <p:dataTable var="planes" value="#{hangar.list}" editable="true" editMode="cell" widgetVar="cellPlanes">
                     <p:ajax event="cellEdit" listener="#{hangar.onCellEdit}" update=":Planeform:msgs"/>
-<!--                    <p:ajax event="rowSelect" listener="#{hangar.onRowSelect(event)}" update=":PlaneForm:msgs"/>
-                    <p:ajax event="rowUnselect" listener="#{hangar.onRowUnselect(event)}" update=":PlaneForm:msgs"/>-->
 
                     <p:column headerText="Id">
                         <p:cellEditor>
@@ -59,9 +57,10 @@
                     
                     <p:column headerText="Home Base">
                         <p:cellEditor>
-                            <f:facet name="output"> <h:outputText value="#{planes.homebase.name}"/> </f:facet>
+                            <f:facet name="output"> <h:outputText value="#{planes.homebase.name}"/></f:facet>
                             <f:facet name="input"> 
-                                <h:selectOneMenu value="#{planes.homebase}" converter="AirportConverter">
+                                <h:selectOneMenu value="#{planes.homebase}" converter="entityConverter">
+                                    <f:selectItem itemValue="#{null}" itemLabel="--select--" />
                                     <f:selectItems value="#{hangar.allAirports}" var="airports" itemLabel="#{airports.name}" itemValue="#{airports}" />
                                 </h:selectOneMenu>
                             </f:facet>
